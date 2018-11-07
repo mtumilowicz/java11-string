@@ -46,6 +46,10 @@ private boolean isLatin1() {
 * `public IntStream chars()`
 * `public IntStream codePoints()`
 
+_Reference_: https://www.javaworld.com/article/3067393/learn-java/when-is-a-character-not-a-character.html  
+_Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChars.html  
+_Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there
+
 ### java 11
 * `public String strip()`
 * `public String stripLeading()`
@@ -53,6 +57,28 @@ private boolean isLatin1() {
 * `public boolean isBlank()`
 * `public Stream<String> lines()`
 * `public String repeat(int count)`
+
+WhiteSpace is clearly described via internals:
+`CharacterData` is an abstract class with many methods,
+one of them is: 
+* `abstract boolean isWhitespace(int ch);`
+We get implementations of this class by its method:
+```
+static final CharacterData of(int ch) {
+    if (ch >>> 8 == 0) {
+        return CharacterDataLatin1.instance;
+    ...
+}
+```
+and (for example) `isWhitespace` in `CharacterDataLatin1.instance`
+is:
+```
+boolean isWhitespace(int ch) {
+    int props = getProperties(ch);
+    return ((props & 0x00007000) == 0x00004000);
+}
+```
+
 
 # project description
 We provide tests for methods mentioned above.
