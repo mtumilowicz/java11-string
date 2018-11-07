@@ -1,8 +1,8 @@
 import org.junit.Test;
 
-import java.util.PrimitiveIterator;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -79,15 +79,27 @@ public class StringTest {
         assertFalse(blank);
     }
     
-    private String convert(IntStream chars) {
-        PrimitiveIterator.OfInt iterator = chars.iterator();
+    @Test
+    public void lines() {
+        Stream<String> lines = "line1\nline2\nline3\nline4\nline5".lines();
 
-        StringJoiner sj = new StringJoiner("-");
+        String convert = convert(lines);
         
-        while (iterator.hasNext()) {
-            sj.add(String.valueOf(iterator.nextInt()));
-        }
+        assertThat(convert, is("line1-line2-line3-line4-line5"));
+    }
+    
+    @Test
+    public void repeat() {
+        String repeat = "abc".repeat(3);
         
-        return sj.toString();
+        assertThat(repeat, is("abcabcabc"));
+    }
+    
+    private String convert(IntStream chars) {
+        return chars.mapToObj(String::valueOf).collect(Collectors.joining("-"));
+    }
+
+    private String convert(Stream<String> lines) {
+        return lines.collect(Collectors.joining("-"));
     }
 }
