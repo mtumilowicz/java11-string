@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by mtumilowicz on 2018-11-07.
@@ -19,11 +21,20 @@ public class StringTest {
         assertThat(convert(chars), is("97-98-99-100-101-102"));
     }
 
+    // Old Italic   U+10300 – U+1032F   (66304–66351)
+    // 𐌢 = http://www.alanwood.net/unicode/unicode_samples.html
     @Test
     public void chars_utf16() {
-        IntStream chars = "\u0000\uffff".chars();
+        IntStream chars = "\uD800\uDF22".chars();
 
-        assertThat(convert(chars), is("0-65535"));
+        assertThat(convert(chars), is("55296-57122"));
+    }
+
+    @Test
+    public void codePoints_utf16() {
+        IntStream chars = "\uD800\uDF22".codePoints();
+
+        assertThat(convert(chars), is("66338"));
     }
 
     @Test
@@ -32,12 +43,40 @@ public class StringTest {
 
         assertThat(convert(chars), is("97-98-99-100-101-102"));
     }
+    
+    @Test
+    public void strip() {
+        String stripped = "  abc ".strip();
+        
+        assertThat(stripped, is("abc"));
+    }
 
     @Test
-    public void codePoints_utf16() {
-        IntStream chars = "\u0000\uffff".codePoints();
+    public void stripLeading() {
+        String stripped = "  abc ".stripLeading();
 
-        assertThat(convert(chars), is("0-65535"));
+        assertThat(stripped, is("abc "));
+    }
+
+    @Test
+    public void stripTrailing() {
+        String stripped = "  abc ".stripTrailing();
+
+        assertThat(stripped, is("  abc"));
+    }
+    
+    @Test
+    public void isBlank_true() {
+        boolean blank = "  ".isBlank();
+        
+        assertTrue(blank);
+    }
+
+    @Test
+    public void isBlank_false() {
+        boolean blank = " a ".isBlank();
+
+        assertFalse(blank);
     }
     
     private String convert(IntStream chars) {
