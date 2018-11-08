@@ -84,3 +84,30 @@ _Reference_: https://www.javaworld.com/article/3067393/learn-java/when-is-a-char
 _Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChars.html  
 _Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there
 
+## description
+A character set is a collection of characters, and a coded character 
+set is a character set in which code points (numeric values) are 
+associated with characters. For example, the American Standard Code 
+for Information Interchange (ASCII) is a coded character set 
+(e.g., hexadecimal value 41 is assigned to "A").
+
+ASCII is an old coded character set standard with an English 
+language bias. In 1987, work began on a universal coded character 
+set that could accommodate all of the characters of the world's 
+living (and, eventually, dead) languages. The resulting standard 
+became known as Unicode.
+
+Unicode 1.0 fixed the size of a character at 16 bits, limiting the 
+maximum number of characters that could be represented to 65,536. 
+To support the thousands of rarely used or obsolete characters 
+(e.g., Egyptian Hieroglyphs) found in historic scripts, Unicode 
+2.0 increased its codespace to more than one million code points 
+by introducing a new architecture based on planes and surrogates.
+
+A plane is a group of 65,536 code points; Unicode supports 17 planes.
+
+Code points found in the BMP are directly accessible. However, 
+code points in the supplementary planes, which represent 
+supplementary characters, are accessed indirectly via surrogate 
+(substitute) pairs in UTF-16.
+
