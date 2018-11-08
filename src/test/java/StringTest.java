@@ -20,9 +20,7 @@ public class StringTest {
         
         assertThat(convert(chars), is("97-98-99-100-101-102"));
     }
-
-    // Old Italic   U+10300 – U+1032F   (66304–66351)
-    // 𐌢 = http://www.alanwood.net/unicode/unicode_samples.html
+    
     @Test
     public void chars_utf16() {
         IntStream chars = "\uD800\uDF22".chars();

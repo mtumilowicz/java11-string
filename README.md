@@ -79,6 +79,30 @@ boolean isWhitespace(int ch) {
 # project description
 We provide tests for methods mentioned above.
 
+The most interesting part is `codePoints()` vs `chars()`:
+* in case of LATIN String - there is no difference
+* in case of surrogates:
+    ```
+    @Test
+    public void chars_utf16() {
+        IntStream chars = "\uD800\uDF22".chars();
+
+        assertThat(convert(chars), is("55296-57122"));
+    }
+
+    @Test
+    public void codePoints_utf16() {
+        IntStream chars = "\uD800\uDF22".codePoints();
+
+        assertThat(convert(chars), is("66338"));
+    }    
+    ```
+    where 
+    ```
+    Old Italic   U+10300 – U+1032F   (66304–66351)
+    𐌢 = http://www.alanwood.net/unicode/unicode_samples.html
+    ```
+
 # characters-unicode-appendix
 _Reference_: https://www.javaworld.com/article/3067393/learn-java/when-is-a-character-not-a-character.html  
 _Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChars.html  
