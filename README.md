@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/java11-string.svg?branch=master)](https://travis-ci.com/mtumilowicz/java11-string)
+
 # java11-string
 Summary of Java 9 & 11 String news.
 
