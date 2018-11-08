@@ -129,6 +129,8 @@ To support the thousands of rarely used or obsolete characters
 by introducing a new architecture based on planes and surrogates.
 
 A plane is a group of 65,536 code points; Unicode supports 17 planes.
+The first plane (code points 0 through 65535), known as the Basic 
+Multilingual Plane (BMP)
 
 Code points found in the BMP are directly accessible. However, 
 code points in the supplementary planes, which represent 
