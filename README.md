@@ -46,9 +46,7 @@ private boolean isLatin1() {
 * `public IntStream chars()`
 * `public IntStream codePoints()`
 
-_Reference_: https://www.javaworld.com/article/3067393/learn-java/when-is-a-character-not-a-character.html  
-_Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChars.html  
-_Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there
+More info at: [characters, unicode appendix](#characters-unicode-appendix)
 
 ### java 11
 * `public String strip()`
@@ -70,8 +68,7 @@ static final CharacterData of(int ch) {
     ...
 }
 ```
-and (for example) `isWhitespace` in `CharacterDataLatin1.instance`
-is:
+and (for example) `isWhitespace` from `CharacterDataLatin1.instance`:
 ```
 boolean isWhitespace(int ch) {
     int props = getProperties(ch);
@@ -79,6 +76,11 @@ boolean isWhitespace(int ch) {
 }
 ```
 
-
 # project description
 We provide tests for methods mentioned above.
+
+# characters-unicode-appendix
+_Reference_: https://www.javaworld.com/article/3067393/learn-java/when-is-a-character-not-a-character.html  
+_Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChars.html  
+_Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there
+
