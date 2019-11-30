@@ -111,6 +111,40 @@ _Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChar
 _Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there  
 _Reference_: [WJUG #250 - Tomasz Nurkiewicz: Charbuster: 10 mitów o Unicode](https://www.youtube.com/watch?v=QIEpZ0MGoBc)
 
+## preface
+* correct java type for one character is: String
+    * but it depends heavily on the definition what one character is
+    * string could store emojis - for example family (event two ints are insufficient)
+* UTF-16 may vary (LE - little endian, BE - big endian) 
+    * byte order is important when we code on many bytes
+    * BOM: byte order mark - magic number at the start of a text stream
+* example:
+    * a, U+0061
+        * UTF-8:           61
+        * UTF-16:       00 61
+        * UTF-32: 00 00 00 61
+    * ą, U+0105
+        * UTF-8:        C4 85 // 2 bytes, one character
+        * UTF-16:       01 85
+        * UTF-32: 00 00 01 05
+        * "ą".equals("ą") // could be false, ą = a + ogonek
+    * 𝄞, U+1D11E
+        * UTF-8:  F0 9D 84 9E
+        * UTF-16: D8 34 DD 1E
+        * UTF-32: 00 01 D1 1e
+        * char in java: 2 bytes; violin key: 4 bytes
+        * "𝄞".length() == 4 // how to validate user input?
+        * surrogate pairs - we need two code-points for one symbol
+* `String.getBytes()` - UTF-16? UTF-32?
+    * no, it depends on the system properties, so if you use it
+    your system will not be portable
+    * if you create bytes from string with that method, send it via web and recreate the string
+    - you have to know about encoding
+    * https://blog.thetaphi.de/2012/07/default-locales-default-charsets-and.html
+* `public int length()` returns code units (code unit in java is char)
+* interesting questions: how twitter counts twit length?
+* use UTF-8: http://utf8everywhere.org/
+
 ## description
 A character set is a collection of characters, and a coded character 
 set is a character set in which code points (numeric values) are 
