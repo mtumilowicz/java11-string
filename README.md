@@ -108,7 +108,8 @@ The most interesting part is `codePoints()` vs `chars()`:
 # characters-unicode-appendix
 _Reference_: https://www.javaworld.com/article/3067393/learn-java/when-is-a-character-not-a-character.html  
 _Reference_: https://docs.oracle.com/javase/tutorial/i18n/text/supplementaryChars.html  
-_Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there
+_Reference_: https://stackoverflow.com/questions/23979676/java-what-are-characters-code-points-and-surrogates-what-difference-is-there  
+_Reference_: [WJUG #250 - Tomasz Nurkiewicz: Charbuster: 10 mitów o Unicode](https://www.youtube.com/watch?v=QIEpZ0MGoBc)
 
 ## description
 A character set is a collection of characters, and a coded character 
